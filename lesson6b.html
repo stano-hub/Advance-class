@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Event handling  -->
+     <h1 id="mainTitle">Hover or click me</h1>
+     <p id="feedback"></p>
+    <!-- we can use onclick, onmouseover, onmouseleave events to handle events -->
+     <form onsubmit="constformsubmit(event)">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <input type="submit" value="Send Form">
+     </form>
+     <br><br>
+     <!-- a dropdown for fruits -->
+     <select name="" id="dropdown" onchange="handleChange()">
+        <option value="" disabled selected>Select a fruit</option>
+        <option value="">Apple</option>
+        <option value="">Banana</option>
+        <option value="">Cherry</option>
+        <option value="">Date</option>
+     </select>
+
+    <script>
+        // we can declare varibles globally 
+        let mainTitle = document.getElementById("mainTitle");
+        let feedback = document.getElementById("feedback");
+        mainTitle.onclick=()=>{
+            // when styling we use .style property="value"
+            mainTitle.style.color="blue";
+            feedback.innerText="the title has been clicked";
+            feedback.style.color="blue";
+
+        }
+        mainTitle.onmouseover=()=>{
+            mainTitle.style.color="red";
+            feedback.innerText="You hovered the title";
+            feedback.style.color="red";
+        }
+        mainTitle.onmouseleave=()=>{
+            mainTitle.style.color="black";
+            feedback.innerText="You left the title";
+            feedback.style.color="black";
+        }
+        constformsubmit = (event) =>{
+            event.preventDefault(); // Prevent the default form submission
+            feedback.innerHTML="<h3 style='color:green'>Form submitted successfully!</h3>";
+
+        }
+        // we can use onchange event to handle dropdown changes
+        const handleChange = () =>{
+            let selectedValue = document.getElementById("dropdown").value
+            feedback.innerText="You selected:a",selectedValue;
+        }
+
+    </script>
+
+</body>
+</html>

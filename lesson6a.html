@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="title" onclick="changeTitle()">Hello world</h1>
+    <h2 id="title2" onchange="changeElement()">Change the element</h2>
+    <button onclick="changeElement()">Change element</button>
+    <p id="para" onclick="getElementContent()">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, reiciendis.</p>
+    <input type="email" name="" id="myInput" >
+    <button onclick="getInputValue()">extract input value </button>
+    <script>
+        const changeTitle=()=>{
+            // Get the title element by its ID
+            let element = document.getElementById("title");
+            // Change the text content of the title element
+            element.innerText="You clicked title"
+            console.log(title)
+        }
+        // we use .innnerHTML to change the whole element
+        const changeElement=()=>{
+           let element = document.getElementById("title2");
+           element.innerHTML="<span style='color:blue'>The element has been changed</span>";
+        }
+        // extract conetent from the element
+        const getElementContent=()=>{
+            let titleContent = document.getElementById("para");
+            // Get the text content of the element
+            let actualContent = para.innerText;
+            console.log(actualContent);
+        }
+        const getInputValue = () => {
+            // Get the input element by its ID
+            let input = document.getElementById("myInput");
+            // Get the value of the input element
+            let Value = input.value;
+            console.log("The input Value is:"+Value);
+        }
+
+    </script>
+</body>
+</html>
