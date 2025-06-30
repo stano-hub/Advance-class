@@ -12,9 +12,9 @@ const app = express();
 // specify the data format you expect to receive your data in
 app.use(express.json());
 
-const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
-
+// import the auth router
+const authRoutes = require("./routes/auth")
+app.use("/api/auth", authRoutes)
 
 // connect to the Database
 mongoose.connect(process.env.MONGO_URI).then(()=>console.log("MongoDB Connected successfully")).catch(err => console.error(err))
