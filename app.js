@@ -16,6 +16,10 @@ app.use(express.json());
 const authRoutes = require("./routes/auth")
 app.use("/api/auth", authRoutes)
 
+// import the user router
+const userRoutes = require("./routes/users");
+app.use("/api/user", userRoutes)
+
 // connect to the Database
 mongoose.connect(process.env.MONGO_URI).then(()=>console.log("MongoDB Connected successfully")).catch(err => console.error(err))
 

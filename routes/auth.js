@@ -88,8 +88,8 @@ router.post("/login", async(req,res)=>{
     const {email, password} = req.body;
     
     // show the entered records from insomnia
-    console.log("The entered name is: ", email)
-    console.log("The entered password is: ", password)
+    // console.log("The entered name is: ", email)
+    // console.log("The entered password is: ", password)
 
 
     // check whether the email entered is registered in the database.
@@ -103,11 +103,10 @@ router.post("/login", async(req,res)=>{
     if(!isMatch) return res.status(400).json({message : "Invalid password"})
 
     const token = jwt.sign({id: user._id}, JWT_SECRET, {expiresIn : '1h'} );
-    // console.log("The generated token is: ", token)
+    console.log("The generated token is: ", token)
 
     res.json({token, user});
 })
-
 
 
 // export the router
