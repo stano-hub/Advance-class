@@ -2,11 +2,13 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/model");
-const { route } = require("./auth");
 const bcrypt = require("bcryptjs");
 
+// import the middleware for authorization
+const auth = require("../middleware/auth")
+
 // Below is a route to fetch all users
-router.get("/", async(req, res)=>{
+router.get("/",auth, async(req, res)=>{
     try{
         const user = await User.find()
         res.json(user)
@@ -17,8 +19,9 @@ router.get("/", async(req, res)=>{
 });
 
 
+
 // fetch a users based on a given id
-router.get("/:id", async(req,res)=>{
+router.get("/:id",auth, async(req,res)=>{
     try{
         const user = await User.findById(req.params.id);
 
@@ -35,7 +38,7 @@ router.get("/:id", async(req,res)=>{
 });
 
 // Below is the update route for the user
-router.put("/:id", async(req, res)=>{
+router.put("/:id",auth, async(req, res)=>{
     try{
         // destructure the details you want to update for the user.
         const {name, email, age, password} = req.body;
@@ -75,7 +78,7 @@ router.put("/:id", async(req, res)=>{
 
 
 // Below is the delete route for the user
-router.delete("/:id", async(req,res)=>{
+router.delete("/:id",auth, async(req,res)=>{
     try{
         // Attempt to find and delete the users by their ID from the URL
         const deletedUser = await User.findByIdAndDelete(req.params.id);
