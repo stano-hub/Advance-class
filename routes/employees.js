@@ -34,11 +34,57 @@ router.post("/", async(req, res)=>{
     }
 });
 
+// Below route is for viewing all the employees available
+// Get all emlpoyees
+router.get("/", async(req, res)=>{
+    try{
+        // find all the employees and put them in a variable
+        const employees = await Employee.find().populate('userId', 'name email photo').populate('departmentId', 'name')
+
+        res.json(employees)
+    }
+    catch(err){
+        res.status(500).json({message : "Failed to fetch employees", "Error" : err.message})
+    }
+});
 
 
+// fetch a single employee based on the id of the employee
+router.get("/:id", async(req, res)=>{
+    try{
+        // Test whether that given id exists inside of the db
+        const employee = await Employee.findById(req.params.id)
 
+        if(!employee){
+            return res.status(404).json({message : "Employee not found"})
+        }
 
+        // if the employee exists, show the details
+        res.json(employee);
+    }
+    catch(err){
+        res.status(500).json({Error : err.message})
+    }
+});
 
+// Delete an employee
+router.delete("/:id", async (req, res)=>{
+    try{
+        // fetch the particular employee id
+        const employee = await Employee.findByIdAndDelete(req.params.id);
+
+        // check whether there is an employee with the given id
+        if(!employee){
+            return res.status(404).json({message : "Employee not found"})
+        }
+
+        // if the id is correct, you should proceed with deleting the employee
+        res.json({message : "Employee Deleted Successfully"})
+    }
+    catch(err){
+        res.status(500).json({Error : err.message})
+    }
+})
 
 
 
