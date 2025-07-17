@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dynamic list </h1>
+    <!-- creating and removing lists -->
+    <input type="text" id="itemInput" placeholder="Enter an item">
+
+
+    <button  onclick="addItem()">Add Item</button>
+
+
+    <ul id="itemList">
+        <!-- List items will be added here dynamically -->
+    </ul>
+    <script>
+        const itemInput = document.getElementById("itemInput");
+        const itemList = document.getElementById("itemList");
+
+        // Function to add an item to the list
+        const addItem = () => {
+           const value = itemInput.value.trim();
+           // check if the input is not empty
+           if (value ==="")return
+           
+           const li = document.createElement("li");
+
+            li.innerText= value;
+            //delete button
+
+            const delBtn = document.createElement("button");            
+            delBtn.innerText = "Delete";
+            delBtn.style.margin = "10px";
+            delBtn.style.backgroundColor = "red";
+            delBtn.style.color = "white";
+
+            // Append the delete button to the list item
+            delBtn.onclick = () => {
+                itemList.removeChild(li);
+            };
+            li.appendChild(delBtn);
+            // Append the list item to the list
+            itemList.appendChild(li);
+            // we clear the input
+            itemInput.value = "";   
+        };
+
+    </script>
+    
+</body>
+</html>
